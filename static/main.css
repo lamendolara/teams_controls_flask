@@ -1,0 +1,77 @@
+.titulo {
+    font-family: 'Gugi', cursive;
+    font-size: 13px;
+}
+
+.abs-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/*min-height: 100vh; */
+
+.fuente_input {
+    font-family: 'Gugi', cursive;
+    font-family: 'Source Serif Pro', serif;
+    color: black;
+    font-size: 11px;
+}
+
+.nav-link {
+    font-size: 13px;
+}
+
+label {
+    font-family: 'Gugi', cursive;
+    font-family: 'Source Serif Pro', serif;
+    font-size: 12px;
+}
+
+
+body {
+    background: #232526;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #414345, #232526);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #414345, #232526); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+input{
+  width: 100%;
+}
+.list_scroll_bar{
+    overflow-y: scroll;
+    height: 350px;
+}
+
+.list_bg {
+    background: #2d3e50;
+    font-size: 12px;
+}
+
+.table_font {
+    font-size: 12px;
+}
+
+.no_disponible {
+    text-decoration: line-through;
+    color: red;
+}
+
+.felicitar {
+    background-image: "/static/pulgar.png";
+}
+
+.mt-n1 {
+  margin-left: -12.00rem !important;
+}
+
+.user-info {
+    list-style: none;
+    text-align: right;
+    margin: 0;
+    padding: 0;
+}
+
+.user-info li {
+    display: inline-block;
+    margin: 0;
+    padding: 0 10px 0 0;
+}

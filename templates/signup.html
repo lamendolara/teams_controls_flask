@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/static/balon.ico">
+    <title>Gestor de Equipo</title>
+    <!--Bootstrap con plantilla - Flatly-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/flatly/bootstrap.min.css">
+    <!--Google Fonts Titulo - Gugi -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gugi&family=Source+Serif+Pro&display=swap" rel="stylesheet">
+    <!--Google Fonts - Source Serif Pro-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro&display=swap" rel="stylesheet">
+    <!--Main.css-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+</head>
+<body>
+     <div class="container-sm w-75 mt-5 p-4 border border-light rounded bg-primary abs-center"> <!--  -->
+       <div class="col-4 p-4 text-center border border-success rounded">
+           {% if error %}
+                <p style="color: red;"><strong>Error:</strong> {{ error }}
+           {% endif %}
+           {% if alertas.mensaje | length > 1 %}
+           <div class="alert alert-{{alertas.type}} alert-dismissible fade show" role="alert">
+               <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+               <span aria-hidden="true">&times;</span></button>
+               {{alertas.mensaje}}
+           </div>
+           {% endif %}
+            <form action="/signup" method="post" novalidate>
+                <a class="col navbar-brand" href="/signup">
+                  <img src="/static/balon_png.png" class="img-responsive">
+                  <h3 class ="d-inline titulo text-white">TEAM CONTROLS</h3>
+                </a>
+                <h5 class="text-dark">REGISTRO DE USUARIO</h5>
+                    {{ form.hidden_tag() }}
+                <div class="row text-success">
+                    {{ form.username.label }}
+                    {{ form.username(size=64) }}
+                    {% for error in form.username.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="row mt-2 text-success">
+                    {{ form.email.label }}
+                    {{ form.email }}
+                    {% for error in form.email.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="row mt-2 text-success">
+                    {{ form.password.label }}
+                    {{ form.password }}<br>
+                    {% for error in form.password.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="row mt-4">
+                    {{ form.submit() }}
+                </div>
+            </form>
+            <div class="mt-4">
+                <a  href="/">Volver al Home</a>
+            </div>
+       </div>
+    </div>
+ </body>
+<footer class="text-center text-dark pt-4">
+    2023 - Leandro Amendolara
+</footer>
+</html>

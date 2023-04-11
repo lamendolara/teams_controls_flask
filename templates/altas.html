@@ -1,0 +1,129 @@
+{% extends "base_template.html" %}
+         {% block content %}
+                <div class="col collapse navbar-collapse ml-auto" id="navbarColor03">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item ml-auto"><a class="nav-link" href="{{ url_for('sesion') }}">SESIÓN</a></li>
+                        <li class="nav-item ml-auto"><a class="nav-link" href="{{ url_for('convocatoria') }}">CONVOCATORIA</a></li>
+                        <li class="nav-item ml-auto"><a class="nav-link text-light" href="{{ url_for('altas') }}">ALTAS</a></li>
+                    </ul>
+                </div>
+            </div>
+         </nav>
+         <div class="row container-lg mt-2 p-2 form-group border border-success rounded" style="margin-left: 0px;margin-top: -10px">
+             <form action="/altas" method="post" class="row g-3 needs-validation" novalidate>
+                <div class="col">
+                    <label for="nombre" class="form-label text-light">Nombre*</label>
+                    <input type="text" name="nombre" class="form-control border border-success fuente_input" id="nombre" aria-describedby="nombre_small" placeholder="Ingrese Nombre" autofocus required>
+                    <div class="valid-feedback">
+                        Correcto!
+                    </div>
+                    <div class="invalid-feedback">
+                        Ingrese un nombre!
+                    </div>
+               </div>
+               <div class="col">
+                    <label for="apellido" class="form-label text-light">Apellido*</label>
+                    <input type="text" name="apellido" class="form-control border border-success fuente_input" id="apellido" aria-describedby="apellido_small" placeholder="Ingrese Apellido" required>
+                    <div class="valid-feedback">
+                        Correcto!
+                    </div>
+                    <div class="invalid-feedback">
+                        Ingrese un apellido!
+                    </div>
+               </div>
+               <div class="col">
+                    <label for="dorsal" class="form-label text-light">Dorsal</label>
+                    <input type="text" name="dorsal" class="form-control border border-success fuente_input" id="dorsal" aria-describedby="dorsal_small" placeholder="Ingrese n° dorsal">
+               </div>
+               <div class="col">
+                    <label for="posicion" class="form-label text-light">Posición*</label>
+                    <select class="col form-select border border-success rounded fuente_input" style="height: 30px;"aria-describedby="posicion_small" name="posicion" id="posicion" required>
+                        <option value="" selected>Selecciona posición</option>
+                        <option value="Portero">Portero</option>
+                        <option value="Defensor">Defensor</option>
+                        <option value="Mediocampista">Mediocampista</option>
+                        <option value="Delantero">Delantero</option>
+                    </select>
+                    <div class="valid-feedback">
+                        Correcto!
+                    </div>
+                    <div class="invalid-feedback">
+                        Ingrese una posición!
+                    </div>
+               </div>
+               <div class="col">
+                    <button type="submit" class="col btn btn-outline-success fuente_menu mb-2" style="margin-top:1.5rem;">GUARDAR</button>
+                    <small id="nombre_small" class="form-text text-dark" style="font-size: 10px;">(*) Campos Obligatorios</small>
+               </div>
+             </form>
+        </div>
+        {% if alertas.mensaje | length > 1 %}
+        <div class="alert alert-{{alertas.type}} alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+            {{alertas.mensaje}}
+        </div>
+        {% endif %}
+        <div class="container sm border border-success list_scroll_bar">
+            <ul id="list-scroll" class="row list-group">
+                <h6 class="text-light mt-2 text-center">JUGADORES</h6>
+                &nbsp
+                &nbsp
+                {% for jugador in todos_los_jugadores %}
+                    <li class="col text-center list-group-item list-group-item-action list-group-item-info text-white list_bg">
+                        <span>
+                             {{ jugador.apellidos }} {{ jugador.nombres }} |{{ jugador.posicion }} | N°: {{ jugador.dorsal }}
+                        </span>
+                        &nbsp
+                        &nbsp
+                        &nbsp
+                        &nbsp
+                        <a href="/editar-jugador/{{jugador.id}}" style="text-decoration:none">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" fill="currentcolor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                            </svg>
+                        </a>
+                        &nbsp
+                        &nbsp
+                        <a href="/eliminar-jugador/{{jugador.id}}" style="text-decoration:none">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" fill="red" class="bi bi-trash" viewBox="0 0 16 16">
+                                <path d="M5.5 5.5A.5.5 0 016 6v6a.5.5 0 01-1 0V6a.5.5 0 01.5-.5zm2.5 0a.5.5 0 01.5.5v6a.5.5 0 01-1 0V6a.5.5 0 01.5-.5zm3 .5a.5.5 0 00-1 0v6a.5.5 0 001 0V6z"/>
+                                <path fill-rule="evenodd" d="M14.5 3a1 1 0 01-1 1H13v9a2 2 0 01-2 2H5a2 2 0 01-2-2V4h-.5a1 1 0 01-1-1V2a1 1 0 011-1H6a1 1 0 011-1h2a1 1 0 011 1h3.5a1 1 0 011 1v1zM4.118 4L4 4.059V13a1 1 0 001 1h6a1 1 0 001-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                            </svg>
+                        </a>
+                    </li>
+                {% endfor %}
+                <div data-bs-spy="scroll" data-bs-target="#list-scroll" data-bs-offset="0" class="scrollspy-example" tabindex="0">
+                </div>
+            </ul>
+        </div>
+        <div class="container sm mt-2 p-2 border border-warning list_bg">
+            <div class="row text-secondary text-center">
+                <div class="col">
+                    <span>
+                        TOTAL = {{total_tg}}
+                    </span>
+                </div>
+                <div class="col">
+                    <span>
+                        PT = {{ todos_los_porteros }}
+                    </span>
+                </div>
+                <div class="col">
+                    <span>
+                        DF = {{ todos_los_defensores }}
+                    </span>
+                </div>
+                <div class="col">
+                    <span>
+                        MED = {{ todos_los_medios }}
+                    </span>
+                </div>
+                <div class="col">
+                    <span>
+                        DEL = {{ todos_los_delanteros }}
+                    </span>
+                </div>
+            </div>
+        </div>
+        {% endblock %}

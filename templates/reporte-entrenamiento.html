@@ -1,0 +1,54 @@
+{% extends "base_template.html" %}
+            {% block content %}
+                    <div class="col collapse navbar-collapse ml-auto" id="navbarColor03">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item ml-auto"><a class="nav-link text-light" href="{{ url_for('sesion') }}">SESIÓN</a></li>
+                        <li class="nav-item ml-auto"><a class="nav-link" href="{{ url_for('convocatoria') }}">CONVOCATORIA</a></li>
+                        <li class="nav-item ml-auto"><a class="nav-link" href="{{ url_for('altas') }}">ALTAS</a></li>
+                    </ul>
+                </div>
+            </div>
+         </nav>
+         <div class="row container-lg mt-2 p-2 border border-success rounded display-flex align-items-center justify-content-center" style="margin-left: 0px;">
+            <h6 class="text-light mt-2">REPORTE DE ASISTENCIA ENTRENAMIENTOS</h6>
+         </div>
+         <div class="row container-lg mt-2 p-2 border border-success rounded text-center list_scroll_bar" style="margin-left: 0px;">
+             <table class="col table table-primary text-light table_font">
+                  <thead>
+                      <th scope="col">Apellidos</th>
+                      <th scope="col">Nombres</th>
+                      <th scope="col">Total Entrenamientos</th>
+                      <th scope="col">Asistencias</th>
+                      <th scope="col">% Asistencias</th>
+                  </thead>
+                  <tbody>
+                  {% for jugador in total_asistencia %}
+                    <tr class="text-secondary">
+                      <td>{{jugador.apellidos}}</td>
+                      <td>{{jugador.nombres}}</td>
+                      <td>{{entrenamiento}}</td>
+                      <td>{{jugador[2]}}</td>
+                      <td>{{jugador[3]}} %</td>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+             </table>
+         <div data-bs-spy="scroll" data-bs-target="#list-scroll" data-bs-offset="0" class="scrollspy-example" tabindex="0">
+         </div>
+         </div>
+         <div class="container-lg mt-2 p-2 row row-cols-2 border border-success rounded display-flex align-items-center justify-content-center" style="margin-left: 0px;">
+             <div class="col photo">
+                 <img src=".\static\images\jugadores_por_posicion.jpg" alt="Photo" style="width:100%;" loading="lazy">
+             </div>
+             <div class="col class photo">
+                 <img src=".\static\images\jugadores_por_entrenamiento.jpg" alt="Photo" style="width:100%;" loading="lazy">
+             </div>
+         </div>
+         <div class="row nav-link text-center">
+                <a href="/sesion">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+                    </svg>
+                </a>
+         </div>
+         {% endblock %}
